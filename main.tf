@@ -72,7 +72,7 @@ resource "aws_security_group" "Githubactions_SG" {
 # Create an EC2 Instance with Default Root Volume
 resource "aws_instance" "Githubactions-EC2" {
   ami           = "ami-0866a3c8686eaeeba"  # Ensure this AMI is valid for your region
-  instance_type = "t2.medium"
+  instance_type = "t2.large"
   key_name      = aws_key_pair.Githubactions_keypair.key_name
 
   root_block_device {
