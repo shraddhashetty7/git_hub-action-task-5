@@ -84,33 +84,7 @@ resource "aws_instance" "Githubactions-EC2" {
     Name = "Githubactions-EC2"
   }
 
-  user_data = <<-EOF
-    #!/bin/bash
-    sudo apt update
-    sudo apt upgrade -y
-    sudo apt install curl -y
-    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-    sudo apt install -y nodejs
-    node -v
-    npm -v
-    sudo apt update
-    sudo npm install @medusajs/medusa-cli -g
-    medusa --version
-    medusa new my-medusa-store
-    cd my-medusa-store
-    npm install
-    sudo apt install postgresql postgresql-contrib -y
-    sudo service postgresql start
-    sudo -u postgres psql -c "CREATE DATABASE medusa_db;"
-    sudo -u postgres psql -c "CREATE USER medusa WITH PASSWORD 'medusa@123';"
-    sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE medusa_db TO medusa;"
-    echo "DATABASE_URL=postgres://medusa:medusa@123@localhost:5432/medusa_db" >> .env
-    sudo chmod 644 .env
-    npm run seed
-    npx medusa user -e "dhanyak.dk@gmail.com" -p supersect
-    npm run start
 
-  EOF
 
 
   associate_public_ip_address = true
